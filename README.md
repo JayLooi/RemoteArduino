@@ -30,10 +30,10 @@ The `Host` folder contains the Python script developed for the host machine to i
 After cloning this repo, goes to `ESP8266_Interface` folder, manually copy all the folders in `ESP8266_Interface` to the Arduino libraries location. 
 Guide to manual library installation can be found from this [link](https://www.arduino.cc/en/guide/libraries#toc5). 
 
-  **Step 1: **
+  **Step 1:**
   
   ![](docs/img/copy_lib.PNG)
   
-  **Step 2: **
+  **Step 2:**
   
   ![](docs/img/paste_lib.PNG)
