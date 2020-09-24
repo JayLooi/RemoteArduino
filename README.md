@@ -25,3 +25,4 @@ The `Host` folder contains the Python script developed for the host machine to i
 
 ## Circuit Connection
 ![Circuit](https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/connection.png)
+<img src="https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/connection.png" width="100" height="100">
