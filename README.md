@@ -31,7 +31,7 @@ After cloning this repo, goes to `ESP8266_Interface` folder, manually copy all t
 Guide to manual library installation can be found from this [link](https://www.arduino.cc/en/guide/libraries#toc5). 
 
   Step 1: 
-  <img src="https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/copy_lib.png">
+  [](docs/img/copy_lib.PNG)
   
   Step 2: 
-  <img src="https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/paste_lib.png">
+  [](docs/img/paste_lib.PNG)
