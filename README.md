@@ -24,5 +24,4 @@ The `ESP8266_Interface` folder contains the libraries developed for ESP8266 WiFi
 The `Host` folder contains the Python script developed for the host machine to interface with the remote Arduino connected by ESP8266 WiFi module. 
 
 ## Circuit Connection
-![Circuit](https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/connection.png)
-<img src="https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/connection.png" width="100" height="100">
+<img src="https://github.com/JayLooi/RemoteArduino/blob/master/docs/img/connection.png" width="200" height="200">
