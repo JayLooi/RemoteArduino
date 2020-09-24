@@ -2,7 +2,7 @@
 _By Looi Kian Seong_
 
 ## Source Code Organisation
-'''
+```
 Repository
 ├── docs
 ├── ESP8266_Interface
@@ -11,7 +11,7 @@ Repository
 │   ├──ArduinoRemoteDebug
 │   └──ArduinoRemoteInterface
 └── Host
-'''
+```
 
 The `docs` folder contains the image(s) used for explanation. 
 
