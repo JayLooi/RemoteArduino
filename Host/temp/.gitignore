@@ -1,0 +1,3 @@
+# Ignore the temp file created when uploading hex file
+*
+!.gitignore

@@ -1,8 +1,5 @@
 # Ignore the compiled bytecode
 __pycache__/
 
-# Ignore the temp file created when uploading hex file
-temp/*
-
 # Ignore the config file for GUI
 *.cfg
