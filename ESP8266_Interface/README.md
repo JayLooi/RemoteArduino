@@ -12,4 +12,4 @@ This library enables both the abovementioned functions with **OTA firmware updat
 
 
 ## 
-Any further explanation on the OTA firmwre update can be found from this [article](). 
+Any further explanation on the OTA firmwre update can be found from this [article](https://medium.com/@kslooi/ota-firmware-update-on-arduino-85ce78ca2e23). 
