@@ -7,7 +7,7 @@ HEX_BUFF_SIZE = 128
 
 
 class ArduinoRemote:
-    def __init__(self, hex_stream_fp, client_id, host, port, username, pw, tx_topic, rx_topic, status_topic, statusLog=None, deviceStatusLog=None, flashLog=None, debugLog=None):
+    def __init__(self, hex_stream_fp, client_id, host, port, username, pw, tx_topic, rx_topic, status_topic, statusLog=print, deviceStatusLog=print, flashLog=print, debugLog=print, exceptionLog=print):
         self.n_of_bytes = 0
         self.sent_bytes = 0
         self.hex_stream_f = None
@@ -21,10 +21,11 @@ class ArduinoRemote:
         self.status_topic = status_topic
         self.is_flashing = False
         self.is_debugging = False
-        self.statusLog = statusLog if statusLog else print
-        self.deviceStatusLog = deviceStatusLog if deviceStatusLog else print
-        self.flashLog = flashLog if flashLog else print
-        self.debugLog = debugLog if debugLog else print
+        self.statusLog = statusLog
+        self.deviceStatusLog = deviceStatusLog
+        self.flashLog = flashLog
+        self.debugLog = debugLog
+        self.exceptionLog = exceptionLog
         self.n_packet = 0
         self.is_connected = False
         self._start_time = 0
@@ -37,11 +38,19 @@ class ArduinoRemote:
         self.client.on_subscribe = self._onSubscribe
 
     def _publish(self, payload):
-        self.client.publish(topic=self.tx_topic, payload=payload)
+        try:
+            self.client.publish(topic=self.tx_topic, payload=payload)
+
+        except ValueError as e:
+            self.exceptionLog(e)
 
     def _subscribe(self):
-        self.client.subscribe(topic=self.rx_topic)
-        self.client.subscribe(topic=self.status_topic)
+        try:
+            self.client.subscribe(topic=self.rx_topic)
+            self.client.subscribe(topic=self.status_topic)
+
+        except ValueError as e:
+            self.exceptionLog(e)
 
     def _onConnect(self, client, userdata, flags, rc):
         if rc == 0:
@@ -128,19 +137,18 @@ class ArduinoRemote:
         if self.is_debugging:
             self.debugStop()
 
-        self.client.unsubscribe(self.rx_topic)
-        self.client.unsubscribe(self.status_topic)
-        self.client.loop_stop()
-        self.client.disconnect()
-        self.client.username_pw_set(self.username, self.pw)
-        self.client.will_set(topic=self.tx_topic, payload='E')
-
         try:
+            self.client.unsubscribe(self.rx_topic)
+            self.client.unsubscribe(self.status_topic)
+            self.client.loop_stop()
+            self.client.disconnect()
+            self.client.username_pw_set(self.username, self.pw)
+            self.client.will_set(topic=self.tx_topic, payload='E')
             self.client.connect(self.host, self.port, 60)
             self.client.loop_start()
 
-        except:
-            pass
+        except Exception as e:
+            self.exceptionLog(e)
 
     def resetOnMessageCallback(self):
         self.client.on_message = self._onMessage
@@ -165,7 +173,7 @@ class ArduinoRemote:
         self.client.on_message = self._onMessage_flashing
         if not self.is_connected:
             self._connect()
-
+        
         self._publish('F' + str(self.n_of_bytes))
 
     def updateBaudrate(self, baudrate):

@@ -472,8 +472,8 @@ class SettingFrame(ActionFrame):
                 self.port.set(int(cfg_dict['port']) if cfg_dict['port'].isdigit() else '')
                 self.username.set(cfg_dict['username'])
                 self.target_device.set(cfg_dict['target_device'])
-                self.rx_topic.set(cfg_dict['rx_topic'])
-                self.tx_topic.set(cfg_dict['tx_topic'])
+                self.rx_topic.set(cfg_dict['rx_topic'] if cfg_dict['rx_topic'] else 'tx')
+                self.tx_topic.set(cfg_dict['tx_topic'] if cfg_dict['rx_topic'] else 'rx')
                 self.status_topic.set(cfg_dict['device_status_topic'])
 
                 main = self.main
