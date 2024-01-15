@@ -46,7 +46,7 @@ class ArduinoOTAFirmwareUpdater: virtual public AbstractPubSub {
 		void _callback(char *topic, byte *payload, uint32_t length);
 		bool _waitOptibootRes_1s();
 		void _getSync();
-		bool _sendHex(const uint8_t *hex, uint8_t len);
+		bool _sendHex(const uint8_t *hex, uint16_t len);
 };
 
 #endif		/* ArduinoOTAFirmwareUpdater_H */

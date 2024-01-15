@@ -32,7 +32,7 @@ void ArduinoOTAFirmwareUpdater::_getSync() {
 	}
 }
 
-bool ArduinoOTAFirmwareUpdater::_sendHex(const uint8_t *hex, uint8_t len) {		// STK500 Protocol
+bool ArduinoOTAFirmwareUpdater::_sendHex(const uint8_t *hex, uint16_t len) {		// STK500 Protocol
 	Serial.write(0x55);
 	Serial.write(_addr & 0xFF);
 	Serial.write(_addr >> 8);
@@ -41,8 +41,8 @@ bool ArduinoOTAFirmwareUpdater::_sendHex(const uint8_t *hex, uint8_t len) {		// 
 	
 	if(_waitOptibootRes_1s()) {
 		Serial.write(0x64);
-		Serial.write(0x00);
-		Serial.write(len);
+		Serial.write((uint8_t)((len >> 8) & 0xFF));
+		Serial.write((uint8_t)(len & 0xFF));
 		Serial.write(0x46);
 		
 		for(uint8_t i=0;i<len;i++) {
@@ -118,7 +118,7 @@ void ArduinoOTAFirmwareUpdater::_setStartFlashTimeout() {
 
 void ArduinoOTAFirmwareUpdater::_callback(char *topic, byte *payload, uint32_t length) {
 	if(_is_flashing) {
-		_is_flashing = _sendHex((uint8_t *)payload, (uint8_t)length);
+		_is_flashing = _sendHex((uint8_t *)payload, (uint16_t)length);
 	} else {
 		byte cmd = payload[0];
 		if(cmd == CMD_FLASH_START) {
